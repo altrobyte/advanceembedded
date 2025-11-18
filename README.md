@@ -1,69 +1,242 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C5 | ESP32-C6 | ESP32-C61 | ESP32-H2 | ESP32-H21 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | --------- | -------- | --------- | -------- | -------- | -------- |
+ESP32 Setup & Programming Guide
+1. Software Installation
+Windows
+Download:
 
-# Blink Example
+Go to: https://dl.espressif.com/dl/esp-idf/
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+Download: esp-idf-tools-setup-x.x.exe
 
-This example demonstrates how to blink a LED by using the GPIO driver or using the [led_strip](https://components.espressif.com/component/espressif/led_strip) library if the LED is addressable e.g. [WS2812](https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf). The `led_strip` library is installed via [component manager](main/idf_component.yml).
+Install:
 
-## How to Use Example
+Run the installer
 
-Before project configuration and build, be sure to set the correct chip target using `idf.py set-target <chip_name>`.
+Click "Next" through all steps
 
-### Hardware Required
+Wait 15-20 minutes
 
-* A development board with normal LED or addressable LED on-board (e.g., ESP32-S3-DevKitC, ESP32-C6-DevKitC etc.)
-* A USB cable for Power supply and programming
+Desktop shortcut "ESP-IDF CMD" will appear
 
-See [Development Boards](https://www.espressif.com/en/products/devkits) for more information about it.
+Install USB Driver:
 
-### Configure the Project
+Download from: https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers
 
-Open the project configuration menu (`idf.py menuconfig`).
+Install and restart computer
 
-In the `Example Configuration` menu:
+Verify:
 
-* Select the LED type in the `Blink LED type` option.
-  * Use `GPIO` for regular LED
-  * Use `LED strip` for addressable LED
-* If the LED type is `LED strip`, select the backend peripheral
-  * `RMT` is only available for ESP targets with RMT peripheral supported
-  * `SPI` is available for all ESP targets
-* Set the GPIO number used for the signal in the `Blink GPIO number` option.
-* Set the blinking period in the `Blink period in ms` option.
+bash
+# Open ESP-IDF CMD
+idf.py --version
+2. Basic Commands
+Create Project
+bash
+# Go to documents folder
+cd %userprofile%\Documents
 
-### Build and Flash
+# Copy example
+xcopy /E /I %IDF_PATH%\examples\get-started\blink my_project
 
-Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
+# Go to project
+cd my_project
 
-(To exit the serial monitor, type ``Ctrl-]``.)
+# Set target
+idf.py set-target esp32
+Build & Flash
+bash
+# Build
+idf.py build
 
-See the [Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html) for full steps to configure and use ESP-IDF to build projects.
+# Flash (replace COM3 with your port)
+idf.py -p COM3 flash
 
-## Example Output
+# Monitor
+idf.py -p COM3 monitor
 
-As you run the example, you will see the LED blinking, according to the previously defined period. For the addressable LED, you can also change the LED color by setting the `led_strip_set_pixel(led_strip, 0, 16, 16, 16);` (LED Strip, Pixel Number, Red, Green, Blue) with values from 0 to 255 in the [source file](main/blink_example_main.c).
+# Flash + Monitor together
+idf.py -p COM3 flash monitor
 
-```text
-I (315) example: Example configured to blink addressable LED!
-I (325) example: Turning the LED OFF!
-I (1325) example: Turning the LED ON!
-I (2325) example: Turning the LED OFF!
-I (3325) example: Turning the LED ON!
-I (4325) example: Turning the LED OFF!
-I (5325) example: Turning the LED ON!
-I (6325) example: Turning the LED OFF!
-I (7325) example: Turning the LED ON!
-I (8325) example: Turning the LED OFF!
-```
+# Exit monitor: Press Ctrl + ]
+Find Your COM Port
+Open Device Manager
 
-Note: The color order could be different according to the LED model.
+Look under "Ports (COM & LPT)"
 
-The pixel number indicates the pixel position in the LED strip. For a single LED, use 0.
+Find "Silicon Labs" or "CH340"
 
-## Troubleshooting
+Note the COM number (COM3, COM4, etc.)
 
-* If the LED isn't blinking, check the GPIO or the LED type selection in the `Example Configuration` menu.
+3. GPIO Pin Reference
+Safe Pins (Use These)
+text
+GPIO2  - Onboard LED
+GPIO4
+GPIO16, GPIO17, GPIO18, GPIO19
+GPIO21, GPIO22, GPIO23
+GPIO25, GPIO26, GPIO27
+GPIO32, GPIO33
+DON'T Use These
+text
+GPIO6-11  - Flash (will damage board!)
+GPIO34-39 - Input only
+Special Pins
+text
+GPIO0  - BOOT button
+GPIO2  - LED (on most boards)
+4. Common Problems & Solutions
+Problem: Board not detected
+Solution:
 
-For any technical queries, please open an [issue](https://github.com/espressif/esp-idf/issues) on GitHub. We will get back to you soon.
+Check USB cable (not all cables work for data)
+
+Install driver from link above
+
+Try different USB port
+
+Restart computer
+
+Problem: Flash failed
+Solution:
+
+Hold BOOT button while connecting
+
+Try: idf.py -p COM3 -b 115200 flash
+
+Press EN button after connecting
+
+Problem: Build error
+Solution:
+
+bash
+idf.py fullclean
+idf.py build
+Problem: Monitor shows garbage
+Solution:
+
+Press EN (reset) button on board
+
+Check COM port number is correct
+
+5. Quick Command Reference
+bash
+# Setup
+idf.py set-target esp32
+
+# Build
+idf.py build
+
+# Flash
+idf.py -p COM3 flash
+
+# Monitor
+idf.py -p COM3 monitor
+
+# Clean
+idf.py fullclean
+
+# Menu
+idf.py menuconfig
+
+# Erase
+idf.py -p COM3 erase-flash
+6. Project File Location
+Where to put your projects:
+
+text
+C:\Users\YourName\Documents\esp32_projects\
+Main code file:
+
+text
+your_project/main/main.c
+Edit this file to change your code!
+
+7. Important Notes
+ESP32 uses 3.3V logic (NOT 5V!)
+
+Always use included resistors with LEDs
+
+USB cable must support data (not just charging)
+
+Keep board connected while flashing
+
+Press BOOT button if flash fails
+
+------------------------------------------------
+
+===============================================
+COMPLETE COMMANDS - GIT + SSH
+===============================================
+
+-------------------
+GIT COMMANDS
+-------------------
+
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+git init
+git clone https://github.com/username/repo.git
+git status
+git add .
+git commit -m "message"
+git push
+git pull
+git log
+git remote add origin https://github.com/username/repo.git
+
+-------------------
+
+-------------------
+
+# Generate SSH key
+ssh-keygen -t ed25519 -C "your@email.com"
+
+# Start SSH agent
+eval "$(ssh-agent -s)"
+
+# Add key to agent
+ssh-add ~/.ssh/id_ed25519
+
+# View public key (copy this)
+cat ~/.ssh/id_ed25519.pub
+
+# Copy to clipboard (Windows)
+clip < ~/.ssh/id_ed25519.pub
+
+# Copy to clipboard (Mac)
+pbcopy < ~/.ssh/id_ed25519.pub
+
+# Test SSH connection
+ssh -T git@github.com
+
+# Change repo to SSH
+git remote set-url origin git@github.com:username/repo.git
+
+# Check remote
+git remote -v
+
+-------------------
+SSH TROUBLESHOOTING
+-------------------
+
+# List added keys
+ssh-add -l
+
+# Fix permissions (Linux/Mac)
+chmod 600 ~/.ssh/id_ed25519
+chmod 644 ~/.ssh/id_ed25519.pub
+
+-------------------
+COMPLETE SSH SETUP STEPS
+-------------------
+
+1. ssh-keygen -t ed25519 -C "your@email.com"
+2. Press Enter (3 times)
+3. eval "$(ssh-agent -s)"
+4. ssh-add ~/.ssh/id_ed25519
+5. cat ~/.ssh/id_ed25519.pub
+6. Copy the output
+7. GitHub.com → Settings → SSH Keys → New SSH key
+8. Paste key → Add
+9. ssh -T git@github.com
+
+===============================================
