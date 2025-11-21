@@ -1,39 +1,26 @@
-/*
- * Basic Industrial Status Indicator
- * Normal operation mode - slow blink (1 second ON/OFF)
- * Used in factories to show machine running status
- */
-
 #include <stdio.h>
 #include "driver/gpio.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "esp_log.h"
+#include "indicator.h"
+#include "alarm.h"
+#include "siren.h"
 
-#define LED_PIN GPIO_NUM_2
-#define TAG "INDICATOR"
+#define TAG "MAIN"
 
 void app_main(void)
 {
-    // Configure LED GPIO as output
+    // GPIO init
     gpio_reset_pin(LED_PIN);
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
     
-    ESP_LOGI(TAG, "Industrial Status Indicator Started");
-    ESP_LOGI(TAG, "Mode: NORMAL OPERATION");
+    ESP_LOGI(TAG, "=== Industrial Control System ===");
+    ESP_LOGI(TAG, "Select mode to run:");
     
-    int cycle_count = 0;
+    // Uncomment one function to run:
     
-    while(1) {
-        // LED ON - Machine Running
-        gpio_set_level(LED_PIN, 1);
-        ESP_LOGI(TAG, "Status: RUNNING | Cycle: %d", cycle_count);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-        
-        // LED OFF
-        gpio_set_level(LED_PIN, 0);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-        
-        cycle_count++;
-    }
+    indicator_basic();           // Mode 1: Basic indicator
+    // indicator_multi_mode();      // Mode 2: Multi-mode
+    // alarm_multi_sensor();        // Mode 3: Sensor alarm
+    // siren_run();                    // Mode 4: Siren
+    // alarm_demo();               // Mode 5: Alarm demo   
 }

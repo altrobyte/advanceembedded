@@ -193,6 +193,8 @@ ssh-keygen -t ed25519 -C "your@email.com"
 # Start SSH agent
 eval "$(ssh-agent -s)"
 
+Get-Content C:\Users\Lenovo\.ssh\id_ed25519_altrobyte.pub | clip
+
 # Add key to agent
 ssh-add ~/.ssh/id_ed25519
 

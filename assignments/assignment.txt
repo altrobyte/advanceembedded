@@ -1,0 +1,43 @@
+Assignment 1: Custom Blink Pattern (Intermediate)
+Objective: Create your own industrial alert pattern
+
+Requirements:
+
+Design a unique blink pattern using 1 LED
+
+Must have 3 different speeds (slow, medium, fast)
+
+Each speed runs for 5 blinks
+
+Add descriptive logs for each blink
+
+Total cycle time should be under 30 seconds
+
+Example Pattern:
+
+Slow: 1000ms (5 blinks)
+
+Medium: 500ms (5 blinks)
+
+Fast: 200ms (5 blinks)
+
+Deliverable: Code + explanation of what industrial condition this pattern represents
+
+Assignment 2: SOS Emergency Signal (Intermediate)
+Objective: Implement Morse code SOS pattern
+
+Requirements:
+
+LED on GPIO 2
+
+SOS pattern: 3 short, 3 long, 3 short
+
+Short blink: 200ms ON, 200ms OFF
+
+Long blink: 600ms ON, 200ms OFF
+
+Gap between S-O-S: 500ms
+
+Loop continuously
+
+Log "S", "O", "S" messages
