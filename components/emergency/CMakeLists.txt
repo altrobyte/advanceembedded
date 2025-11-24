@@ -1,5 +1,5 @@
 idf_component_register(
-    SRCS "indicator.c"
+    SRCS "emergency.c"
     INCLUDE_DIRS "."
     REQUIRES driver
 )

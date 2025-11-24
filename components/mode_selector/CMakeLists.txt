@@ -1,5 +1,5 @@
 idf_component_register(
-    SRCS "alarm.c"
+    SRCS "mode_selector.c"
     INCLUDE_DIRS "."
     REQUIRES driver
 )

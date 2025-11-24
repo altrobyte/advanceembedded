@@ -1,4 +1,4 @@
-idf_component_register(SRCS "main.c" "siren.c"
+idf_component_register(SRCS "main.c"
                        INCLUDE_DIRS "."
-                       REQUIRES alarm indicator
+                       REQUIRES emergency long_press_power mode_selector
                        )

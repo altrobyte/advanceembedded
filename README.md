@@ -179,6 +179,8 @@ git status
 git add .
 git commit -m "message"
 git push
+git branch 
+git branch -a
 git pull
 git log
 git remote add origin https://github.com/username/repo.git
