@@ -5,7 +5,7 @@
 
 #define TAG "POWER_SYSTEM"
 
-#define DEBOUNCE_DELAY    20     // 50ms debounce for button
+#define DEBOUNCE_DELAY    50     // 50ms debounce for button
 #define LONG_PRESS_TIME 3000     // 3000ms (3 seconds) long-press threshold
 
 // For logging readable state names

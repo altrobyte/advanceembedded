@@ -71,7 +71,7 @@ void emergency_alarm_run(void)
      *  - How many times emergency was activated
      *  - Useful for logging and analysis in real plants
      */
-    
+
     bool alarm_active = false;
     int last_button_state = 1;  // Start HIGH due to pull‑up (button released)
     int alarm_count = 0;
