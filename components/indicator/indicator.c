@@ -91,7 +91,7 @@ void indicator_basic(void)
  */
 void indicator_multi_mode(void)
 {
-    operation_mode_t current_mode = MODE_NORMAL;
+    operation_mode_ind_t current_mode = MODE_NORMAL;
     int cycle_count = 0;
     int on_time_ms, off_time_ms;
     const char* mode_name;

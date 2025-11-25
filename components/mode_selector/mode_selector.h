@@ -17,8 +17,8 @@
  */
 
 // Button and LED pins (can be shared with other modules if needed)
-#define MODE_BUTTON_PIN  GPIO_NUM_18   // Front-panel mode select push button
-#define MODE_STATUS_LED  GPIO_NUM_2    // Panel status indicator LED
+#define MODE_BUTTON_PIN  GPIO_NUM_33   // Front-panel mode select push button
+#define MODE_STATUS_LED  GPIO_NUM_26    // Panel status indicator LED
 
 // Human-readable machine modes
 typedef enum {

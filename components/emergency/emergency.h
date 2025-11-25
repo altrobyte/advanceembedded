@@ -18,8 +18,8 @@
  * - How fast blinking indicates critical condition
  */
 
-#define BUTTON_PIN  GPIO_NUM_18   // Emergency push button (E‑STOP)
-#define ALARM_LED   GPIO_NUM_2    // Alarm indicator (tower light / siren)
+#define BUTTON_PIN  GPIO_NUM_33   // Emergency push button (E‑STOP)
+#define ALARM_LED   GPIO_NUM_26    // Alarm indicator (tower light / siren)
 
 /*
  * @brief Run the emergency alarm task (blocking)

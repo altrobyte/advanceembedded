@@ -4,17 +4,14 @@
 #include "indicator.h"
 #include "alarm.h"
 #include "siren.h"
+#include "long_press_power.h"
+#include "emergency.h"
+#include "mode_selector.h"
 
 #define TAG "MAIN"
 
 void app_main(void)
 {
-    // GPIO init
-    gpio_reset_pin(LED_PIN);
-    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
-    
-    ESP_LOGI(TAG, "=== Industrial Control System ===");
-    ESP_LOGI(TAG, "Select mode to run:");
     
     // Uncomment one function to run:
     
@@ -23,5 +20,7 @@ void app_main(void)
     // alarm_multi_sensor();        // Mode 3: Sensor alarm
     // siren_run();                // Mode 4: Siren
     // alarm_demo();              // Mode 5: Alarm demo   
-    long_press_power_run();
+    // long_press_power_run();
+    // emergency_alarm_run();
+    mode_selector_run();
 }

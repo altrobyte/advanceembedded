@@ -4,7 +4,7 @@
 
 #define TAG "MODE_SELECTOR"
 
-#define DEBOUNCE_DELAY 50  // 50ms debounce
+#define DEBOUNCE_DELAY 20  // 50ms debounce
 
 // Mode names for logging
 static const char* mode_names[] = {"MANUAL", "AUTO", "MAINTENANCE"};
