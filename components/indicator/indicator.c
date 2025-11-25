@@ -142,7 +142,7 @@ void indicator_multi_mode(void)
         ESP_LOGD(TAG, "Mode: %s | Cycle: %d | LED: OFF | Interval: %dms", 
                  mode_name, cycle_count, off_time_ms);
         vTaskDelay(off_time_ms / portTICK_PERIOD_MS);
-        
+         
         cycle_count++;
         
         // Simulate condition deterioration - automatic mode escalation

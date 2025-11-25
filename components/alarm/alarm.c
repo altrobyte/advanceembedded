@@ -15,11 +15,11 @@ static void alarm_pattern_fast(void)
     
     for(int i = 0; i < 5; i++) {
         gpio_set_level(LED_PIN, 1);  // LED ON
-        ESP_LOGI(TAG, "Blink %d/5: ON", i+1);
+        ESP_LOGI(TAG, "Blink %d/5: ON", i++);
         vTaskDelay(100 / portTICK_PERIOD_MS);
         
         gpio_set_level(LED_PIN, 0);  // LED OFF
-        ESP_LOGI(TAG, "Blink %d/5: OFF", i+1);
+        ESP_LOGI(TAG, "Blink %d/5: OFF", i++);
         vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }

@@ -18,9 +18,9 @@ void app_main(void)
     
     // Uncomment one function to run:
     
-    indicator_basic();           // Mode 1: Basic indicator
-    // indicator_multi_mode();      // Mode 2: Multi-mode
+    // indicator_basic();                // Mode 1: Basic indicator
+     indicator_multi_mode();       // Mode 2: Multi-mode
     // alarm_multi_sensor();        // Mode 3: Sensor alarm
-    // siren_run();                    // Mode 4: Siren
-    // alarm_demo();               // Mode 5: Alarm demo   
+    // siren_run();                // Mode 4: Siren
+    // alarm_demo();              // Mode 5: Alarm demo   
 }
